@@ -1,53 +1,6 @@
 local pipecoverspictures = require("pipe-covers")
 
 local foundry = data.raw["assembling-machine"]["foundry"]
--- for _, fb in ipairs(foundry.fluid_boxes) do
--- 	fb.pipe_connections[1].flow_direction = "input-output"
--- end
-
--- local extra_input_1 = table.deepcopy(foundry.fluid_boxes[1])
--- extra_input_1.enable_working_visualisations = { "input-pipe-2" }
--- extra_input_1.pipe_connections[1].position = {2, -1}
--- extra_input_1.pipe_connections[1].direction = defines.direction.east
--- table.insert(foundry.fluid_boxes, extra_input_1)
--- local extra_input_2 = table.deepcopy(foundry.fluid_boxes[1])
--- extra_input_2.enable_working_visualisations = { "input-pipe-2" }
--- extra_input_2.pipe_connections[1].position = {2, 1}
--- extra_input_2.pipe_connections[1].direction = defines.direction.east
--- table.insert(foundry.fluid_boxes, extra_input_2)
-
--- local extra_output_1 = table.deepcopy(foundry.fluid_boxes[3])
--- extra_output_1.enable_working_visualisations = { "output-pipe-2" }
--- extra_output_1.pipe_connections[1].position = {-2, -1}
--- extra_output_1.pipe_connections[1].direction = defines.direction.west
--- table.insert(foundry.fluid_boxes, extra_output_1)
--- local extra_output_2 = table.deepcopy(foundry.fluid_boxes[3])
--- extra_output_2.enable_working_visualisations = { "output-pipe-2" }
--- extra_output_2.pipe_connections[1].position = {-2, 1}
--- extra_output_2.pipe_connections[1].direction = defines.direction.west
--- table.insert(foundry.fluid_boxes, extra_output_2)
-
--- local input_pipe_2_graphics = table.deepcopy(foundry.graphics_set.working_visualisations[2])
--- input_pipe_2_graphics.name = "input-pipe-2"
--- local rotate = input_pipe_2_graphics.north_animation
--- input_pipe_2_graphics.north_animation = input_pipe_2_graphics.west_animation
--- input_pipe_2_graphics.west_animation = input_pipe_2_graphics.south_animation
--- input_pipe_2_graphics.south_animation = input_pipe_2_graphics.east_animation
--- input_pipe_2_graphics.east_animation = rotate
--- input_pipe_2_graphics.west_secondary_draw_order = input_pipe_2_graphics.south_secondary_draw_order
--- input_pipe_2_graphics.south_secondary_draw_order = nil
--- table.insert(foundry.graphics_set.working_visualisations, 3, input_pipe_2_graphics)
-
--- local output_pipe_2_graphics = table.deepcopy(foundry.graphics_set.working_visualisations[1])
--- output_pipe_2_graphics.name = "output-pipe-2"
--- local rotate = output_pipe_2_graphics.north_animation
--- output_pipe_2_graphics.north_animation = output_pipe_2_graphics.west_animation
--- output_pipe_2_graphics.west_animation = output_pipe_2_graphics.south_animation
--- output_pipe_2_graphics.south_animation = output_pipe_2_graphics.east_animation
--- output_pipe_2_graphics.east_animation = rotate
--- output_pipe_2_graphics.east_secondary_draw_order = output_pipe_2_graphics.north_secondary_draw_order
--- output_pipe_2_graphics.north_secondary_draw_order = nil
--- table.insert(foundry.graphics_set.working_visualisations, 2, output_pipe_2_graphics)
 
 table.insert(data.raw["technology"]["foundry"].effects, 2, {
 	type = "unlock-recipe",
@@ -70,12 +23,7 @@ local input_positions = {
 local output_positions = {
 	{1, 2, south, foundry_pipe_pictures.counter_clockwise, foundry_pipe_pictures.clockwise},
 	{-2, -1, west, foundry_pipe_pictures.clockwise, foundry_pipe_pictures.counter_clockwise},
-	-- {2, -1, east},
 }
-
--- for _, visualisation in pairs(require('foundry-pictures')) do
--- 	table.insert(foundry.graphics_set.working_visualisations, visualisation)
--- end
 
 local original = foundry.fluid_boxes[1]
 
@@ -178,5 +126,12 @@ for _, recipe in pairs(data.raw['recipe']) do
 				end
 			end
 		end
+	end
+end
+
+local simulations = data.raw["utility-constants"]["default"].main_menu_simulations
+if simulations ~= nil then
+	if simulations.vulcanus_lava_forge ~= nil then
+		simulations.vulcanus_lava_forge.save = "__passthrough-foundries__/menu-simulations/menu-simulation-vulcanus-lava-forge-fixed.zip"
 	end
 end

@@ -2,7 +2,7 @@
     "name": "passthrough-foundries",
     "version": "0.1.0",
     "title": "Passthrough foundries",
-    "author": "Me",
+    "author": "jDomantas",
     "factorio_version": "2.1",
     "dependencies": [
         "base >= 2.1",
