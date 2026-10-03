@@ -16,6 +16,7 @@ item.place_result = "lava-pump"
 
 local entity = table.deepcopy(data.raw["offshore-pump"]["offshore-pump"])
 entity.name = "lava-pump"
+entity.icon = "__passthrough-foundries__/graphics/lava-pump.png"
 entity.minable.result = "lava-pump"
 entity.fluid_box.pipe_connections[1].connection_category = "molten-fluid"
 entity.tile_buildability_rules[2].required_tiles.layers = {lava_tile=true}
